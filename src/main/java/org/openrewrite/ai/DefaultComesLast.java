@@ -35,11 +35,13 @@ public class DefaultComesLast extends Recipe {
 
     @Override
     public String getDescription() {
-        return "`switch` can contain a `default` clause for various reasons: to handle unexpected values, " +
-               "to show that all the cases were properly considered. " +
-               "For readability purposes, to help a developer to quickly find the default behavior of a switch statement, " +
-               "it is recommended to put the default clause at the end of the switch statement. This rule raises an issue " +
-               "if the default clause is not the last one of the switch's cases.";
+        return """
+               `switch` can contain a `default` clause for various reasons: to handle unexpected values, \
+               to show that all the cases were properly considered. \
+               For readability purposes, to help a developer to quickly find the default behavior of a switch statement, \
+               it is recommended to put the default clause at the end of the switch statement. This rule raises an issue \
+               if the default clause is not the last one of the switch's cases.\
+               """;
     }
 
     @Override
@@ -50,8 +52,8 @@ public class DefaultComesLast extends Recipe {
                 GenerativeCodeEditor editor = new GenerativeCodeEditor(this::getCursor, ctx);
 
                 for (Statement statement : aSwitch.getCases().getStatements()) {
-                    if (statement instanceof J.Case && ((J.Case) statement).getExpressions().get(0) instanceof J.Identifier) {
-                        J.Identifier identifier = (J.Identifier) ((J.Case) statement).getExpressions().get(0);
+                    if (statement instanceof J.Case case1 && case1.getExpressions().getFirst() instanceof J.Identifier) {
+                        J.Identifier identifier = (J.Identifier) case1.getExpressions().getFirst();
                         if ("default".equals(identifier.getSimpleName())) {
                             return editor.edit(
                                 aSwitch,

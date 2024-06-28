@@ -28,8 +28,8 @@ public class GenerativeCodeExecutionContextView extends DelegatingExecutionConte
     }
 
     public static GenerativeCodeExecutionContextView view(ExecutionContext ctx) {
-        if (ctx instanceof GenerativeCodeExecutionContextView) {
-            return (GenerativeCodeExecutionContextView) ctx;
+        if (ctx instanceof GenerativeCodeExecutionContextView view) {
+            return view;
         }
         return new GenerativeCodeExecutionContextView(ctx);
     }
